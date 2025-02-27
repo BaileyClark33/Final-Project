@@ -37,7 +37,7 @@ void sensorInit() {
     sensorState = OFF;
 }
 
-bool sensorRead() {
+bool doorClosed() {
     return sensorState;
 }
 
