@@ -52,7 +52,7 @@ void motorControlInit() {
 washerState_t washerStateRead() {
     return washerState;
 }
-dryerState_t dryerStateRead(); {
+dryerState_t dryerStateRead() {
     return dryerState;
 }
 
@@ -60,7 +60,7 @@ void washerMotorWrite( washerState_t direction ) {
     washerState = direction;
 }
 void dryerMotorWrite( dryerState_t direction ) {
-    motorState = direction;
+    dryerState = direction;
 }
 
 void washerMotorUpdate() {
@@ -77,7 +77,7 @@ void washerMotorUpdate() {
                 if ( washerRunTime < 0 ) {
                     washerMotorM1Pin.input();
                     washerMotorM2Pin.input();
-                    motorState = STOPPED;
+                    washerState = STOPPED;
                 } else {
                     washerMotorM1Pin.output();
                     washerMotorM2Pin.input();
@@ -107,7 +107,7 @@ void dryerMotorUpdate() {
                 if ( dryerRunTime < 0 ) {
                     dryerMotorM1Pin.input();
                     dryerMotorM2Pin.input();
-                    motorState = STOPPED;
+                    dryerState = STOPPED;
                 } else {
                     dryerMotorM1Pin.output();
                     dryerMotorM2Pin.input();

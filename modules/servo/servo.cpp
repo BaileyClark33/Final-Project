@@ -39,8 +39,6 @@ bool went_up = false;
 
 int servo_update_time;
 float angle;
-int servo_step_time;
-int wait_time;
 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -58,11 +56,11 @@ int getAngle() {
 }
 
 void servoLock() {
-   
+   servo.write(DUTY_90);
 }
 
 void servoUnlock() {
-    
+    servo.write(DUTY_ZERO);
 }
 
 

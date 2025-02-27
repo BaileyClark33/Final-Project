@@ -11,6 +11,8 @@
 
 void userInterfaceInit();
 void userInterfaceUpdate();
+bool getWasherButtonState();
+bool getDryerButtonState();
 
 //=====[#include guards - end]=================================================
 

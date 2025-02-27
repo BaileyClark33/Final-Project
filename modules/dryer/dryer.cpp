@@ -1,6 +1,7 @@
 //=====[Libraries]=============================================================
 
 #include "dryer.h"
+#include "dryer_display.h"
 
 //=====[Declaration of private defines]========================================
 

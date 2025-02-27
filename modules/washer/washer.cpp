@@ -1,6 +1,8 @@
 //=====[Libraries]=============================================================
 
 #include "washer.h"
+#include "washer_display.h"
+#include "servo.h"
 
 //=====[Declaration of private defines]========================================
 

@@ -3,8 +3,8 @@
 #include "mbed.h"
 #include "arm_book_lib.h"
 
-#ifndef _DISPLAY_H_
-#define _DISPLAY_H_
+#ifndef _WASHER_DISPLAY_H_
+#define _WASHER_DISPLAY_H_
 
 //=====[Declaration of public defines]=========================================
 

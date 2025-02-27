@@ -26,12 +26,20 @@ DigitalOut dryerOff( /* ENTER NUCLEO PIN */ );
 
 //=====[Implementations of public functions]===================================
 
-void ledInit() {
+void washerLedInit() {
+    washerHot == OFF;
+    washerWarm == OFF;
+    washerCold == OFF;
+}
 
+void dryerLedInit() {
+    dryerHigh == OFF;
+    dryerLow == OFF;
+    dryerOff == OFF;
 }
 
 void setLEDon(DigitalOut light) {
-    light = On;
+    light = ON;
 }
 
 //=====[Implementations of private functions]==================================
