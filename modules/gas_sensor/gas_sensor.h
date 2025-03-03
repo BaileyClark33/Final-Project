@@ -1,7 +1,7 @@
 //=====[#include guards - begin]===============================================
 
-#ifndef _SERVO_H_
-#define _SERVO_H_
+#ifndef _GAS_SENSOR_H_
+#define _GAS_SENSOR_H_
 
 //=====[Declaration of public defines]=========================================
 
@@ -9,10 +9,11 @@
 
 //=====[Declarations (prototypes) of public functions]=========================
 
-void servoInit();
-void servoUpdate();
-void getAngle();
+void gasInit();
+void gasUpdate();
+void gasStateOveride();
+void gasStateRead();
 
 //=====[#include guards - end]=================================================
 
-#endif // _SERVO_H_
+#endif // 

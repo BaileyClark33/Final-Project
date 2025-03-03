@@ -1,13 +1,13 @@
 //=====[Libraries]=============================================================
 
-#include "Washer_Dryer.h"
+#include "laundry.h"
 
 //=====[Main function, the program entry point after power on or reset]========
 
 int main()
 {
-    washerDryerInit();
+    laundryInit();
     while (true) {
-        washerDryerUpdate();
+        laundryUpdate();
     }
 }

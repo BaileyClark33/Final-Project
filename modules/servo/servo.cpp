@@ -42,6 +42,9 @@ float angle;
 
 //=====[Declarations (prototypes) of private functions]========================
 
+void servoLock();
+void servoUnlock();
+
 //=====[Implementations of public functions]===================================
 
 void servoInit() {
@@ -55,6 +58,12 @@ int getAngle() {
     return angle;
 }
 
+void servoUpdate() {
+    
+}
+
+//=====[Implementations of private functions]==================================
+
 void servoLock() {
    servo.write(DUTY_90);
 }
@@ -62,6 +71,3 @@ void servoLock() {
 void servoUnlock() {
     servo.write(DUTY_ZERO);
 }
-
-
-//=====[Implementations of private functions]==================================

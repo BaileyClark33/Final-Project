@@ -38,8 +38,35 @@ void dryerLedInit() {
     dryerOff == OFF;
 }
 
-void setLEDon(DigitalOut light) {
-    light = ON;
+void setWasherWarmOn() {
+    washerLedInit();
+    washerWarm = On;
 }
+
+void setWasherHotOn() {
+    washerLedInit();
+    washerHot = On;
+}
+
+void setWasherColdOn() {
+    washerLedInit();
+    washerCold = On;
+}
+
+void setDryerHighOn() {
+    dryerLedInit();
+    dryerHigh = On;
+}
+
+void setDryerLowOn() {
+    dryerLedInit();
+    dryerLow = On;
+}
+
+void setDryerOffOn() {
+    dryerLedInit();
+    dryerOff = On;
+}
+
 
 //=====[Implementations of private functions]==================================

@@ -5,6 +5,7 @@
 
 #include "LED.h"
 #include "user_interface.h"
+#include "gas_sensor.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -21,6 +22,8 @@ DigitalIn dryerHigh(/* ENTER NUCLEO PIN */);
 DigitalIn dryerLow(/* ENTER NUCLEO PIN */);
 DigitalIn dryerOff(/* ENTER NUCLEO PIN */);
 DigitalIn dryerStart(/* ENTER NUCLEO PIN */);
+
+DigitalIn gasOveride(/* ENTER NUCLEO PIN */);
 
 
 //=====[Declaration of external public global variables]=======================
@@ -74,6 +77,10 @@ void washerSelect() {
     washerButtonState = true;
   } else {
     washerButtonState = false;
+  }
+
+  if (gasOveride) {
+    gasOveride(true);
   }
 }
 

@@ -21,17 +21,13 @@
 //=====[Implementations of public functions]===================================
 
 void laundryInit() {
-
     washerInit();
     dryerInit();
-    
 }
 
 void laundryUpdate() {
-   
     washerUpdate();
     dryerUpdate();
-
 }
 
 //=====[Implementations of private functions]==================================

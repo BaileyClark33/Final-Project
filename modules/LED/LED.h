@@ -11,7 +11,12 @@
 
 void washerLedInit();
 void dryerLedInit();
-void setLEDon(DigitalOut light);
+void setWasherHotOn();
+void setWasherWarmOn();
+void setWasherColdOn();
+void setDryerHighOn();
+void setDryerLowOn();
+void setDryerOffOn();
 
 //=====[#include guards - end]=================================================
 
