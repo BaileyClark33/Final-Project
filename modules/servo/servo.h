@@ -10,7 +10,8 @@
 //=====[Declarations (prototypes) of public functions]=========================
 
 void servoInit();
-void servoUpdate();
+void servoLock();
+void servoUnlock();
 void getAngle();
 
 //=====[#include guards - end]=================================================

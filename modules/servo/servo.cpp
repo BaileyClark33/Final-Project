@@ -58,16 +58,15 @@ int getAngle() {
     return angle;
 }
 
-void servoUpdate() {
-    
-}
-
-//=====[Implementations of private functions]==================================
-
 void servoLock() {
    servo.write(DUTY_90);
+   delay(1000);
 }
 
 void servoUnlock() {
     servo.write(DUTY_ZERO);
+    delay(1000);
 }
+//=====[Implementations of private functions]==================================
+
+

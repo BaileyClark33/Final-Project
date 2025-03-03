@@ -21,6 +21,8 @@
 
 //=====[Declaration and initialization of private global variables]============
 
+static bool locked = false;
+
 //=====[Declarations (prototypes) of private functions]========================
 
 void washerRunning();
@@ -41,6 +43,10 @@ void washerUpdate() {
   if (gasStateRead()) {
       washerSelect();
       sensorUpdate();
+      if (!locked) {
+        servoLock();
+        locked = true;
+      }
       if (washerDoorClosed() && getWasherButtonState()) {
           washerRunning();
       }
