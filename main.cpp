@@ -9,5 +9,6 @@ int main()
     laundryInit();
     while (true) {
         laundryUpdate();
+        delay(10)
     }
 }
