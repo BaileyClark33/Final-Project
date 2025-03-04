@@ -9,6 +9,9 @@
 
 //=====[Declaration of private defines]========================================
 
+#define DEBOUNCETIME 10
+#define TIMEINCREMENT 1
+
 //=====[Declaration of private data types]=====================================
 
 //=====[Declaration and initialization of public global objects]===============
@@ -34,12 +37,16 @@ DigitalIn gasOveride(/* ENTER NUCLEO PIN */);
 
 bool washerButtonState;
 bool dryerButtonState;
+int washerDebounceTime;
+int dryerDebounceTime;
 
 //=====[Declarations (prototypes) of private functions]========================
 
 //=====[Implementations of public functions]===================================
 
 void userInterfaceInit() {
+    washerDebounceTime = 0;
+    dryerDebounceTime = 0;
   washerLedInit();
   dryerLedInit();
 }
@@ -74,9 +81,13 @@ void washerSelect() {
   }
 
   if (washerStart) {
-    washerButtonState = true;
-  } else {
-    washerButtonState = false;
+      washerDebounceTime += TIMEINCREMENT;
+      if (washerDebounceTime > DEBOUNCETIME) {  
+          washerButtonState = true;
+          washerDebounceTime = 0;
+      } else {
+          washerButtonState = false;
+      }
   }
 
   if (gasOveride) {
@@ -99,8 +110,12 @@ void dryerSelect() {
   }
 
   if (dryerStart) {
-    dryerButtonState = true;
-  } else {
-    dryerButtonState = false;
+      dryerDebounceTime += TIMEINCREMENT;
+    if (dryerDebounceTime > DEBOUNCETIME) {  
+          dryerButtonState = true;
+          dryerDebounceTime = 0
+      } else {
+          dryerButtonState = false;
+      }
   }
 }

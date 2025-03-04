@@ -34,6 +34,7 @@ void washerInit() {
   alarmInit();
   servoInit();
   sensorInit();
+  displayInit();
   userInterfaceInit();
   motorControlInit();
 }
@@ -50,6 +51,8 @@ void washerUpdate() {
       if (washerDoorClosed() && getWasherButtonState()) {
           washerRunning();
       }
+  } else {
+      if (getWasherButtonState())
   }
 }
 
