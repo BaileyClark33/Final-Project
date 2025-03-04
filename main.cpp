@@ -4,11 +4,10 @@
 
 //=====[Main function, the program entry point after power on or reset]========
 
-int main()
-{
+int main() {
     laundryInit();
     while (true) {
         laundryUpdate();
-        delay(10)
+        delay(10);
     }
 }
