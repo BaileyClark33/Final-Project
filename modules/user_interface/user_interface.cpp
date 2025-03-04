@@ -16,10 +16,10 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalIn washerHot(/* ENTER NUCLEO PIN */);
-DigitalIn washerWarm(/* ENTER NUCLEO PIN */);
-DigitalIn washerCold(/* ENTER NUCLEO PIN */);
-DigitalIn washerStart(/* ENTER NUCLEO PIN */);
+DigitalIn washerHot(D10);
+DigitalIn washerWarm(D11);
+DigitalIn washerCold(D12);
+DigitalIn washerStart(D13);
 
 DigitalIn dryerHigh(/* ENTER NUCLEO PIN */);
 DigitalIn dryerLow(/* ENTER NUCLEO PIN */);
@@ -68,16 +68,13 @@ bool getDryerButtonState() {
 
 void washerSelect() {
   if (washerHot) {
-    washerLedInit();
-    setLEDon(washerHot);
+    setWasherHotOn();
   }
   if (washerWarm) {
-    washerLedInit();
-    setLEDon(washerWarm);
+    setWasherWarmOn();
   }
   if (washerCold) {
-    washerLedInit();
-    setLEDon(washerCold);
+    setWasherColdOn();
   }
 
   if (washerStart) {
@@ -97,16 +94,13 @@ void washerSelect() {
 
 void dryerSelect() {
   if (dryerHigh) {
-    dryerLedInit();
-    setLEDon(dryerHigh);
+    setDryerHighOn();
   }
   if (dryerLow) {
-    dryerLedInit();
-    setLEDon(dryerLow);
+    setDryerLowOn();
   }
   if (dryerOff) {
-    dryerLedInit();
-    setLEDon(dryerOff);
+    setDryerOffOn();
   }
 
   if (dryerStart) {

@@ -48,7 +48,7 @@ void alarmUpdate( int strobeTime ) {
     if( alarmState ) {
         if( accumulatedTimeAlarm >= strobeTime ) {
                 accumulatedTimeAlarm = 0;
-                alarm= !alarm;
+                alarm = !alarm;
         }
     } else {
         alarm = OFF;

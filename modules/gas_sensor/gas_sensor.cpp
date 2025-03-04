@@ -17,7 +17,7 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalIn gasSensor();
+DigitalIn gasSensor(PE_0);
 
 //=====[Declaration of external public global variables]=======================
 
@@ -35,7 +35,7 @@ float gasValues[SAMPLESIZE];
 
 void gasInit() {
   gasState = false;
-  gasOveride = false;
+  gasOveride = true;
 }
 
 bool gasStateRead() { return gasState; }
@@ -64,6 +64,7 @@ void gasUpdate() {
     int average = total / SAMPLESIZE;
     if (average > DETERGENTINLEVEL) {
       gasState = true;
+      gasOveride = true;
     } else {
       gasState = false;
     }

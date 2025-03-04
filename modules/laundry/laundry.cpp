@@ -22,12 +22,12 @@
 
 void laundryInit() {
     washerInit();
-    dryerInit();
+    //dryerInit();
 }
 
 void laundryUpdate() {
     washerUpdate();
-    dryerUpdate();
+    //dryerUpdate();
 }
 
 //=====[Implementations of private functions]==================================
