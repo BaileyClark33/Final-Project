@@ -1,8 +1,5 @@
 //=====[#include guards - begin]===============================================
 
-#include "mbed.h"
-#include "arm_book_lib.h"
-
 #ifndef _WASHER_DISPLAY_H_
 #define _WASHER_DISPLAY_H_
 

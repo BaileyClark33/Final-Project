@@ -1,7 +1,6 @@
 //=====[#include guards - begin]===============================================
 
-#include "mbed.h"
-#include "arm_book_lib.h"
+
 
 #ifndef _DRYER_DISPLAY_H_
 #define _DRYER_DISPLAY_H_

@@ -3,6 +3,8 @@
 #include "laundry.h"
 #include "washer.h"
 #include "dryer.h"
+#include "mbed.h"
+#include "arm_book_lib.h"
 
 //=====[Declaration of private defines]========================================
 

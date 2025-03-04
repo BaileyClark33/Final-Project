@@ -9,6 +9,8 @@
 #include "user_interface.h"
 #include "washer_display.h"
 #include "laundry.h"
+#include "mbed.h"
+#include "arm_book_lib.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -22,6 +24,8 @@
 UnbufferedSerial uart(USBTX, USBRX, 115200);
 
 //=====[Declaration of external public global variables]=======================
+
+DigitalOut green(LED1);
 
 //=====[Declaration and initialization of public global variables]=============
 
@@ -42,6 +46,7 @@ void displayTime();
 //=====[Implementations of public functions]===================================
 
 void washerInit() {
+    test = OFF;
   gasInit();
   alarmInit();
   servoInit();
@@ -52,7 +57,7 @@ void washerInit() {
 }
 
 void washerUpdate() {
-    uart.write("test");
+  test = ON;
   if (!testDicipline) {
     gasUpdate();
     if (gasStateRead()) {

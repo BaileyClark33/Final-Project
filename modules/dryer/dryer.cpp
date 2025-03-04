@@ -2,6 +2,8 @@
 
 #include "dryer.h"
 #include "dryer_display.h"
+#include "mbed.h"
+#include "arm_book_lib.h"
 
 //=====[Declaration of private defines]========================================
 
