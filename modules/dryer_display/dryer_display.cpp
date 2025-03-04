@@ -1,5 +1,5 @@
 //=====[Libraries]=============================================================
-
+/*
 #include "mbed.h"
 #include "arm_book_lib.h"
 #include "dryer_display.h"
@@ -224,3 +224,4 @@ static void displayDataBusWrite( uint8_t dataBus )
     displayPinWrite( DISPLAY_PIN_EN, OFF );  
     delay( 1 );                   
 }
+*/
