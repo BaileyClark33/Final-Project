@@ -19,7 +19,7 @@
 //=====[Declaration and initialization of public global objects]===============
 
 DigitalIn washerLightSensor( PA_3 );
-DigitalIn dryerLightSensor( /* ENTER NUCLEO PIN */ );
+DigitalIn dryerLightSensor( PC_0 );
 
 //=====[Declaration of external public global variables]=======================
 

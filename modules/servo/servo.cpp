@@ -24,7 +24,7 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-PwmOut servo( /* ENTER NUCLEO PIN */ );
+PwmOut servo( PE_14 );
 
 //=====[Declaration of external public global variables]=======================
 
@@ -54,7 +54,7 @@ void servoInit() {
    angle = DUTY_ZERO;
 }
 
-int getAngle() {
+float getAngle() {
     return angle;
 }
 

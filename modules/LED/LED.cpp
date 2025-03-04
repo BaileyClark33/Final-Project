@@ -8,12 +8,12 @@
 
 //=====[Declaration of private data types]=====================================
 
-DigitalOut washerHot(PE_15);
-DigitalOut washerWarm(PB_10);
-DigitalOut washerCold(PB_11);
-DigitalOut dryerHigh(PA_0);
-DigitalOut dryerLow(PB_0);
-DigitalOut dryerOff(PE_0);
+DigitalOut washerHotLight(PE_15);
+DigitalOut washerWarmLight(PB_10);
+DigitalOut washerColdLight(PB_11);
+DigitalOut dryerHighLight(PA_0);
+DigitalOut dryerLowLight(PB_0);
+DigitalOut dryerOffLight(PE_0);
 
 //=====[Declaration and initialization of public global objects]===============
 
@@ -28,45 +28,45 @@ DigitalOut dryerOff(PE_0);
 //=====[Implementations of public functions]===================================
 
 void washerLedInit() {
-    washerHot = OFF;
-    washerWarm = OFF;
-    washerCold = OFF;
+    washerHotLight = OFF;
+    washerWarmLight = OFF;
+    washerColdLight = OFF;
 }
 
 void dryerLedInit() {
-    dryerHigh = OFF;
-    dryerLow = OFF;
-    dryerOff = OFF;
+    dryerHighLight = OFF;
+    dryerLowLight = OFF;
+    dryerOffLight = OFF;
 }
 
 void setWasherWarmOn() {
     washerLedInit();
-    washerWarm = ON;
+    washerWarmLight = ON;
 }
 
 void setWasherHotOn() {
     washerLedInit();
-    washerHot = ON;
+    washerHotLight = ON;
 }
 
 void setWasherColdOn() {
     washerLedInit();
-    washerCold = ON;
+    washerColdLight = ON;
 }
 
 void setDryerHighOn() {
     dryerLedInit();
-    dryerHigh = ON;
+    dryerHighLight = ON;
 }
 
 void setDryerLowOn() {
     dryerLedInit();
-    dryerLow = ON;
+    dryerLowLight = ON;
 }
 
 void setDryerOffOn() {
     dryerLedInit();
-    dryerOff = ON;
+    dryerOffLight = ON;
 }
 
 

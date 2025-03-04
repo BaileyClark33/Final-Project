@@ -22,8 +22,8 @@ DigitalInOut dryerMotorM2Pin(PF_2);
 
 //=====[Declaration and initialization of public global variables]=============
 
-washerState_t washerState;
-dryerState_t dryerState;
+motorState_t washerState;
+motorState_t dryerState;
 
 //=====[Declaration and initialization of private global variables]============
 
@@ -46,11 +46,11 @@ void motorControlInit() {
   dryerState = STOPPED;
 }
 
-washerState_t washerStateRead() { return washerState; }
-dryerState_t dryerStateRead() { return dryerState; }
+motorState_t washerStateRead() { return washerState; }
+motorState_t dryerStateRead() { return dryerState; }
 
-void washerMotorWrite(washerState_t direction) { washerState = direction; }
-void dryerMotorWrite(dryerState_t direction) { dryerState = direction; }
+void washerMotorWrite(motorState_t direction) { washerState = direction; }
+void dryerMotorWrite(motorState_t direction) { dryerState = direction; }
 
 void washerMotorUpdate() {
   static int motorUpdateCounter = 0;

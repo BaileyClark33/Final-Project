@@ -10,21 +10,16 @@
 typedef enum {
     RUNNING,
     STOPPED
-} washerState_t;
-
-typedef enum {
-    RUNNING,
-    STOPPED
-} dryerState_t;
+} motorState_t;
 
 //=====[Declarations (prototypes) of public functions]=========================
 
 void motorControlInit();
-void washerMotorWrite( washerState_t direction );
-void dryerMotorWrite( dryerState_t direction );
+void washerMotorWrite( motorState_t direction );
+void dryerMotorWrite( motorState_t direction );
 
-washerState_t washerStateRead();
-dryerState_t dryerStateRead();
+motorState_t washerStateRead();
+motorState_t dryerStateRead();
 
 void washerMotorUpdate();
 void dryerMotorUpdate();

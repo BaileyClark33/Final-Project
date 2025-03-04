@@ -12,7 +12,7 @@
 void servoInit();
 void servoLock();
 void servoUnlock();
-void getAngle();
+float getAngle();
 
 //=====[#include guards - end]=================================================
 

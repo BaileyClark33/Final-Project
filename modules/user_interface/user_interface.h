@@ -13,6 +13,7 @@ void userInterfaceInit();
 void userInterfaceUpdate();
 bool getWasherButtonState();
 bool getDryerButtonState();
+bool getHasSelected(); 
 
 //=====[#include guards - end]=================================================
 

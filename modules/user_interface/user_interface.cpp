@@ -21,12 +21,12 @@ DigitalIn washerWarm(D11);
 DigitalIn washerCold(D12);
 DigitalIn washerStart(D13);
 
-DigitalIn dryerHigh(/* ENTER NUCLEO PIN */);
-DigitalIn dryerLow(/* ENTER NUCLEO PIN */);
-DigitalIn dryerOff(/* ENTER NUCLEO PIN */);
-DigitalIn dryerStart(/* ENTER NUCLEO PIN */);
+DigitalIn dryerHigh(PB_1);
+DigitalIn dryerLow(PC_2);
+DigitalIn dryerOff(PF_4);
+DigitalIn dryerStart(PB_6);
 
-DigitalIn gasOveride(/* ENTER NUCLEO PIN */);
+DigitalIn gasOver(PB_2);
 
 
 //=====[Declaration of external public global variables]=======================
@@ -39,8 +39,12 @@ bool washerButtonState;
 bool dryerButtonState;
 int washerDebounceTime;
 int dryerDebounceTime;
+static bool hasSelected = false;
 
 //=====[Declarations (prototypes) of private functions]========================
+
+void washerSelect();
+void dryerSelect();
 
 //=====[Implementations of public functions]===================================
 
@@ -64,17 +68,24 @@ bool getDryerButtonState() {
     return dryerButtonState;
 }
 
+bool getHasSelected() {
+    return hasSelected;
+}
+
 //=====[Implementations of private functions]==================================
 
 void washerSelect() {
   if (washerHot) {
     setWasherHotOn();
+    hasSelected = true;
   }
   if (washerWarm) {
     setWasherWarmOn();
+    hasSelected = true;
   }
   if (washerCold) {
     setWasherColdOn();
+    hasSelected = true;
   }
 
   if (washerStart) {
@@ -87,27 +98,30 @@ void washerSelect() {
       }
   }
 
-  if (gasOveride) {
-    gasOveride(true);
+  if (gasOver) {
+    gasStateOveride(true);
   }
 }
 
 void dryerSelect() {
   if (dryerHigh) {
     setDryerHighOn();
+    hasSelected = true;
   }
   if (dryerLow) {
     setDryerLowOn();
+    hasSelected = true;
   }
   if (dryerOff) {
     setDryerOffOn();
+    hasSelected = true;
   }
 
   if (dryerStart) {
       dryerDebounceTime += TIMEINCREMENT;
     if (dryerDebounceTime > DEBOUNCETIME) {  
           dryerButtonState = true;
-          dryerDebounceTime = 0
+          dryerDebounceTime = 0;
       } else {
           dryerButtonState = false;
       }

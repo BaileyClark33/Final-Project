@@ -10,7 +10,8 @@
 //=====[Declarations (prototypes) of public functions]=========================
 
 void sensorInit();
-bool doorClosed();
+bool washerDoorClosed();
+bool dryerDoorClosed();
 void sensorUpdate();
 
 //=====[#include guards - end]=================================================

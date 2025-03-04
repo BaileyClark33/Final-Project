@@ -11,8 +11,8 @@
 
 void gasInit();
 void gasUpdate();
-void gasStateOveride();
-void gasStateRead();
+void gasStateOveride(bool state);
+bool gasStateRead();
 
 //=====[#include guards - end]=================================================
 
