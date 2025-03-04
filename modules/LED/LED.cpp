@@ -7,12 +7,12 @@
 
 //=====[Declaration of private data types]=====================================
 
-DigitalOut washerHot( /* ENTER NUCLEO PIN */ );
-DigitalOut washerWarm( /* ENTER NUCLEO PIN */ );
-DigitalOut washerCold( /* ENTER NUCLEO PIN */ );
-DigitalOut dryerHigh( /* ENTER NUCLEO PIN */ );
-DigitalOut dryerLow( /* ENTER NUCLEO PIN */ );
-DigitalOut dryerOff( /* ENTER NUCLEO PIN */ );
+DigitalOut washerHot(PE_15);
+DigitalOut washerWarm(PB_10);
+DigitalOut washerCold(PB_11);
+DigitalOut dryerHigh(PA_0);
+DigitalOut dryerLow(PB_0);
+DigitalOut dryerOff(PE_0);
 
 //=====[Declaration and initialization of public global objects]===============
 
@@ -27,45 +27,45 @@ DigitalOut dryerOff( /* ENTER NUCLEO PIN */ );
 //=====[Implementations of public functions]===================================
 
 void washerLedInit() {
-    washerHot == OFF;
-    washerWarm == OFF;
-    washerCold == OFF;
+    washerHot = OFF;
+    washerWarm = OFF;
+    washerCold = OFF;
 }
 
 void dryerLedInit() {
-    dryerHigh == OFF;
-    dryerLow == OFF;
-    dryerOff == OFF;
+    dryerHigh = OFF;
+    dryerLow = OFF;
+    dryerOff = OFF;
 }
 
 void setWasherWarmOn() {
     washerLedInit();
-    washerWarm = On;
+    washerWarm = ON;
 }
 
 void setWasherHotOn() {
     washerLedInit();
-    washerHot = On;
+    washerHot = ON;
 }
 
 void setWasherColdOn() {
     washerLedInit();
-    washerCold = On;
+    washerCold = ON;
 }
 
 void setDryerHighOn() {
     dryerLedInit();
-    dryerHigh = On;
+    dryerHigh = ON;
 }
 
 void setDryerLowOn() {
     dryerLedInit();
-    dryerLow = On;
+    dryerLow = ON;
 }
 
 void setDryerOffOn() {
     dryerLedInit();
-    dryerOff = On;
+    dryerOff = ON;
 }
 
 
