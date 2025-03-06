@@ -2,15 +2,15 @@
 
 #include "washer.h"
 #include "alarm.h"
+#include "arm_book_lib.h"
 #include "gas_sensor.h"
+#include "laundry.h"
 #include "light_sensor.h"
+#include "mbed.h"
 #include "motor.h"
 #include "servo.h"
 #include "user_interface.h"
 #include "washer_display.h"
-#include "laundry.h"
-#include "mbed.h"
-#include "arm_book_lib.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -47,7 +47,7 @@ void displayTime();
 //=====[Implementations of public functions]===================================
 
 void washerInit() {
-    test = OFF;
+  test = OFF;
   gasInit();
   alarmInit();
   servoInit();
@@ -55,18 +55,23 @@ void washerInit() {
   displayInit();
   userInterfaceInit();
   motorControlInit();
+  displayInit();
+  displayCharPositionWrite(0, 0);
+  displayStringWrite("Start");
+  displayCharPositionWrite(0, 1);
+  displayStringWrite("Begin");
 }
 
 void washerUpdate() {
   if (!testDicipline) {
     gasUpdate();
     if (gasStateRead()) {
-      if (!running) {  
+      if (!running) {
         userInterfaceUpdate();
         sensorUpdate();
       }
       if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
-          test = ON;
+        test = ON;
         if (!setup) {
           servoLock();
           washerMotorWrite(RUNNING);
@@ -74,9 +79,20 @@ void washerUpdate() {
           setup = true;
         }
         washerRunning();
+      } else if (!getWasherButtonState()) {
+        displayInit();
+        displayCharPositionWrite(0, 0);
+        displayStringWrite("Can't start yet:");
+        displayCharPositionWrite(0, 1);
+        displayStringWrite("Select or close Door");
       }
     } else {
-      if (getWasherButtonState()) {
+      if (!getWasherButtonState()) {
+        displayInit();
+        displayCharPositionWrite(0, 0);
+        displayStringWrite("Can't start yet:");
+        displayCharPositionWrite(0, 1);
+        displayStringWrite("Select or close Door");
       }
     }
   } else {
