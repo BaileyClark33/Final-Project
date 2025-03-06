@@ -3,6 +3,7 @@
 #include "mbed.h"
 #include "arm_book_lib.h"
 #include "washer_display.h"
+#include <stdint.h>
 
 //=====[Declaration of private defines]========================================
 

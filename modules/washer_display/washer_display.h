@@ -3,6 +3,9 @@
 #ifndef _WASHER_DISPLAY_H_
 #define _WASHER_DISPLAY_H_
 
+#include "mbed.h"
+#include "arm_book_lib.h"
+
 //=====[Declaration of public defines]=========================================
 
 //=====[Declaration of public data types]======================================

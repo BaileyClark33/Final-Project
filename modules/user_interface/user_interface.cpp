@@ -16,9 +16,9 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalIn washerHot(D10);
+DigitalIn washerHot(D12);
 DigitalIn washerWarm(D11);
-DigitalIn washerCold(D12);
+DigitalIn washerCold(D10);
 DigitalIn washerStart(D13);
 
 DigitalIn dryerHigh(PB_1);
@@ -49,12 +49,23 @@ void dryerSelect();
 //=====[Implementations of public functions]===================================
 
 void userInterfaceInit() {
-    washerDebounceTime = 0;
-    dryerDebounceTime = 0;
+  washerDebounceTime = 0;
+  dryerDebounceTime = 0;
   washerLedInit();
   dryerLedInit();
-}
 
+  washerHot.mode(PullDown);
+  washerWarm.mode(PullDown);
+  washerCold.mode(PullDown);
+  washerStart.mode(PullDown);
+
+  dryerHigh.mode(PullDown);
+  dryerLow.mode(PullDown);
+  dryerOff.mode(PullDown);
+  dryerStart.mode(PullDown);
+
+  gasOver.mode(PullDown);
+}  
 void userInterfaceUpdate() {
   washerSelect();
   dryerSelect();

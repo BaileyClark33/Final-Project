@@ -25,7 +25,7 @@ UnbufferedSerial uart(USBTX, USBRX, 115200);
 
 //=====[Declaration of external public global variables]=======================
 
-DigitalOut green(LED1);
+DigitalOut test(LED1);
 
 //=====[Declaration and initialization of public global variables]=============
 
@@ -33,8 +33,9 @@ DigitalOut green(LED1);
 
 static bool setup = false;
 static bool alarmSetup = false;
-static bool testDicipline = true;
+static bool testDicipline = false;
 static bool soundAlarm = false;
+static bool running = false;
 int timer = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
@@ -57,13 +58,15 @@ void washerInit() {
 }
 
 void washerUpdate() {
-  test = ON;
   if (!testDicipline) {
     gasUpdate();
     if (gasStateRead()) {
-      userInterfaceUpdate();
-      sensorUpdate();
+      if (!running) {  
+        userInterfaceUpdate();
+        sensorUpdate();
+      }
       if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
+          test = ON;
         if (!setup) {
           servoLock();
           washerMotorWrite(RUNNING);
@@ -111,6 +114,7 @@ void washerDicipline() {
 }
 
 void washerRunning() {
+  running = true;
   displayTime();
   if (timer < 0) {
     testDicipline = true;

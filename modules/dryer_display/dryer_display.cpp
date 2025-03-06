@@ -1,9 +1,10 @@
 //=====[Libraries]=============================================================
-/*
+
 #include "mbed.h"
 #include "arm_book_lib.h"
 #include "dryer_display.h"
-
+#include <stdint.h>
+/*
 //=====[Declaration of private defines]========================================
 
 #define DISPLAY_IR_CLEAR_DISPLAY   0b00000001

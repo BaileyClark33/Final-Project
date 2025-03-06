@@ -28,18 +28,12 @@ DigitalOut dryerOffLight(PE_0);
 //=====[Implementations of public functions]===================================
 
 void washerLedInit() {
-    washerHotLight.mode(PullDown);
-    washerWarmLight.mode(PullDown);
-    washerColdLight.mode(PullDown);
     washerHotLight = OFF;
     washerWarmLight = OFF;
     washerColdLight = OFF;
 }
 
 void dryerLedInit() {
-    dryerHighLight.mode(PullDown);
-    dryerLowLight.mode(PullDown);
-    dryerOffLight.mode(PullDown);
     dryerHighLight = OFF;
     dryerLowLight = OFF;
     dryerOffLight = OFF;
