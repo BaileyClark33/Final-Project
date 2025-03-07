@@ -56,7 +56,7 @@ void setWasherColdOn() {
 }
 
 void WstartLEDon() {
-    washerStart = On;
+    washerStart = ON;
 }
 
 void setDryerHighOn() {
