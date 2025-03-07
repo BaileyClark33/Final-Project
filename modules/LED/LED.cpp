@@ -11,6 +11,7 @@
 DigitalOut washerHotLight(PE_15);
 DigitalOut washerWarmLight(PB_10);
 DigitalOut washerColdLight(PB_11);
+DigitalOut washerStart(PE_14);
 DigitalOut dryerHighLight(PA_0);
 DigitalOut dryerLowLight(PB_0);
 DigitalOut dryerOffLight(PE_0);
@@ -52,6 +53,10 @@ void setWasherHotOn() {
 void setWasherColdOn() {
     washerLedInit();
     washerColdLight = ON;
+}
+
+void WstartLEDon() {
+    washerStart = On;
 }
 
 void setDryerHighOn() {

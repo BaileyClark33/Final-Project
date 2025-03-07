@@ -18,8 +18,8 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalIn washerLightSensor( PA_3 );
-DigitalIn dryerLightSensor( PC_0 );
+AnalogIn washerLightSensor( PA_3 );
+AnalogIn dryerLightSensor( PC_0 );
 
 //=====[Declaration of external public global variables]=======================
 

@@ -71,8 +71,8 @@ void washerUpdate() {
         sensorUpdate();
       }
       if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
-        test = ON;
         if (!setup) {
+          startOn();
           servoLock();
           washerMotorWrite(RUNNING);
           timer = STARTTIME;

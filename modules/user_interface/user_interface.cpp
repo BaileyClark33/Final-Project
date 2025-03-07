@@ -114,6 +114,10 @@ void washerSelect() {
   }
 }
 
+void startOn() {
+    WstartLEDon();
+}
+
 void dryerSelect() {
   if (dryerHigh) {
     setDryerHighOn();
