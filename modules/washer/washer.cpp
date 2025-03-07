@@ -63,6 +63,9 @@ void washerInit() {
 }
 
 void washerUpdate() {
+  if (washerDoorClosed()) {
+    test = ON;
+  }
   if (!testDicipline) {
     gasUpdate();
     if (gasStateRead()) {

@@ -32,6 +32,7 @@ void washerLedInit() {
     washerHotLight = OFF;
     washerWarmLight = OFF;
     washerColdLight = OFF;
+    washerStartLight = OFF;
 }
 
 void dryerLedInit() {

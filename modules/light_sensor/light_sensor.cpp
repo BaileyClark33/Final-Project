@@ -37,8 +37,8 @@ float dryerLightValues[SAMPLESIZE];
 //=====[Implementations of public functions]===================================
 
 void sensorInit() {
-    washerSensorState = OFF;
-    dryerSensorState = OFF;
+    washerSensorState = false;
+    dryerSensorState = false;
 }
 
 bool washerDoorClosed() {
@@ -71,16 +71,16 @@ void sensorUpdate() {
 
     int average1 = total1/SAMPLESIZE;
     if (average1 < DOORCLOSEDLEVEL) {
-        washerSensorState = ON;
+        washerSensorState = true;
     } else {
-        washerSensorState = OFF;
+        washerSensorState = false;
     }
 
     int average2 = total2/SAMPLESIZE;
     if (average2 < DOORCLOSEDLEVEL) {
-        dryerSensorState = ON;
+        dryerSensorState = true;
     } else {
-        dryerSensorState = OFF;
+        dryerSensorState = false;
     }
 }
 
