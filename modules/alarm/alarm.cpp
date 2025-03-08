@@ -15,7 +15,7 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalInOut alarm( PD_7 );
+DigitalInOut alarm(PE_10);
 
 //=====[Declaration of external public global variables]=======================
 
@@ -23,14 +23,16 @@ DigitalInOut alarm( PD_7 );
 
 //=====[Declaration and initialization of private global variables]============
 
-static bool alarmState = OFF;
+static bool alarmState = false;
+static bool sound = false;
 
 //=====[Declarations (prototypes) of private functions]========================
 
 //=====[Implementations of public functions]===================================
 
 void alarmInit() {
-    alarm = OFF;
+    alarm.mode(OpenDrain);
+    alarm.input();
 }
 
 bool alarmStateRead() {
@@ -48,10 +50,17 @@ void alarmUpdate( int strobeTime ) {
     if( alarmState ) {
         if( accumulatedTimeAlarm >= strobeTime ) {
                 accumulatedTimeAlarm = 0;
-                alarm = !alarm;
+                if (sound) {
+                    alarm.input();
+                    sound = false;
+                } else {
+                    alarm.output();
+                    sound = true;
+                }
         }
     } else {
-        alarm = OFF;
+        alarm.input();
+        sound = false;
     }
 }
 

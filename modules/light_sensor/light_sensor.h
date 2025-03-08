@@ -12,7 +12,8 @@
 void sensorInit();
 bool washerDoorClosed();
 bool dryerDoorClosed();
-void sensorUpdate();
+void WsensorUpdate();
+void DsensorUpdate();
 
 //=====[#include guards - end]=================================================
 

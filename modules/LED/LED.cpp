@@ -11,7 +11,7 @@
 DigitalOut washerHotLight(PE_15);
 DigitalOut washerWarmLight(PB_10);
 DigitalOut washerColdLight(PB_11);
-DigitalOut washerStartLight(PE_14);
+DigitalOut washerStartLight(PC_6);
 DigitalOut dryerHighLight(PA_0);
 DigitalOut dryerLowLight(PB_0);
 DigitalOut dryerOffLight(PE_0);

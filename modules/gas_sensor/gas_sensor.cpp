@@ -34,8 +34,8 @@ float gasValues[SAMPLESIZE];
 //=====[Implementations of public functions]===================================
 
 void gasInit() {
-  gasState = true;
-  gasOveride = true;
+  gasState = false;
+  gasOveride = false;
 }
 
 bool gasStateRead() { return gasState; }

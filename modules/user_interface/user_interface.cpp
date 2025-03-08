@@ -9,9 +9,6 @@
 
 //=====[Declaration of private defines]========================================
 
-#define DEBOUNCETIME 10
-#define TIMEINCREMENT 1
-
 //=====[Declaration of private data types]=====================================
 
 //=====[Declaration and initialization of public global objects]===============
@@ -39,7 +36,10 @@ bool washerButtonState;
 bool dryerButtonState;
 int washerDebounceTime;
 int dryerDebounceTime;
-static bool hasSelected = false;
+bool hasSelected = false;
+
+bool WdoorClosed;
+bool DdoorClosed;
 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -49,8 +49,6 @@ void dryerSelect();
 //=====[Implementations of public functions]===================================
 
 void userInterfaceInit() {
-  washerDebounceTime = 0;
-  dryerDebounceTime = 0;
   washerLedInit();
   dryerLedInit();
 
@@ -72,11 +70,33 @@ void userInterfaceUpdate() {
 }
 
 bool getWasherButtonState() {
+    if (WdoorClosed && hasSelected && washerStart == ON) {
+        washerButtonState = true;
+    }
     return washerButtonState;
 }
 
 bool getDryerButtonState() {
+    if (DdoorClosed && hasSelected && dryerStart == ON) {
+    dryerButtonState = true;
+  }
     return dryerButtonState;
+}
+
+bool getWasherStart() {
+    return washerStart == ON;
+}
+
+bool getDryerStart() {
+    return dryerStart == ON;
+}
+
+void setWDoorClosedBool(bool state) {
+    WdoorClosed = state;
+}
+
+void setDDoorClosedBool(bool state) {
+    DdoorClosed = state;
 }
 
 bool getHasSelected() {
@@ -86,30 +106,20 @@ bool getHasSelected() {
 //=====[Implementations of private functions]==================================
 
 void washerSelect() {
-  if (washerHot) {
+  if (washerHot == ON) {
     setWasherHotOn();
     hasSelected = true;
   }
-  if (washerWarm) {
+  if (washerWarm == ON) {
     setWasherWarmOn();
     hasSelected = true;
   }
-  if (washerCold) {
+  if (washerCold == ON) {
     setWasherColdOn();
     hasSelected = true;
   }
 
-  if (washerStart) {
-      washerDebounceTime += TIMEINCREMENT;
-      if (washerDebounceTime > DEBOUNCETIME) {  
-          washerButtonState = true;
-          washerDebounceTime = 0;
-      } else {
-          washerButtonState = false;
-      }
-  }
-
-  if (gasOver) {
+  if (gasOver == ON) {
     gasStateOveride(true);
   }
 }
@@ -119,26 +129,16 @@ void startOn() {
 }
 
 void dryerSelect() {
-  if (dryerHigh) {
+  if (dryerHigh == ON) {
     setDryerHighOn();
     hasSelected = true;
   }
-  if (dryerLow) {
+  if (dryerLow == ON) {
     setDryerLowOn();
     hasSelected = true;
   }
-  if (dryerOff) {
+  if (dryerOff == ON) {
     setDryerOffOn();
     hasSelected = true;
-  }
-
-  if (dryerStart) {
-      dryerDebounceTime += TIMEINCREMENT;
-    if (dryerDebounceTime > DEBOUNCETIME) {  
-          dryerButtonState = true;
-          dryerDebounceTime = 0;
-      } else {
-          dryerButtonState = false;
-      }
   }
 }

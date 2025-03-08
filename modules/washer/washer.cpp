@@ -26,6 +26,7 @@ UnbufferedSerial uart(USBTX, USBRX, 115200);
 //=====[Declaration of external public global variables]=======================
 
 DigitalOut test(LED1);
+DigitalOut blue(LED2);
 
 //=====[Declaration and initialization of public global variables]=============
 
@@ -48,6 +49,7 @@ void displayTime();
 
 void washerInit() {
   test = OFF;
+  blue = OFF;
   gasInit();
   alarmInit();
   servoInit();
@@ -57,54 +59,59 @@ void washerInit() {
   motorControlInit();
   displayInit();
   displayCharPositionWrite(0, 0);
-  displayStringWrite("Start");
+  displayStringWrite("Hello: Put in");
   displayCharPositionWrite(0, 1);
-  displayStringWrite("Begin");
+  displayStringWrite("Detergent");
 }
 
 void washerUpdate() {
-  if (washerDoorClosed()) {
-    test = ON;
-  }
   if (!testDicipline) {
     gasUpdate();
     if (gasStateRead()) {
       if (!running) {
+        displayCharPositionWrite(0, 0);
+        displayStringWrite("Now Select Mode");
+        displayCharPositionWrite(0, 1);
+        displayStringWrite("and Close Door");
         userInterfaceUpdate();
-        sensorUpdate();
+        WsensorUpdate();
       }
-      if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
+      if (washerDoorClosed()) {
+          setWDoorClosedBool(true);
+      } else {
+          setWDoorClosedBool(false);
+      }
+      if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) { 
+        test = ON;
         if (!setup) {
           startOn();
-          servoLock();
           washerMotorWrite(RUNNING);
           timer = STARTTIME;
           setup = true;
+          servoLock();
         }
         washerRunning();
-      } else if (!getWasherButtonState()) {
+      } else if (getWasherStart()) {
         displayInit();
         displayCharPositionWrite(0, 0);
-        displayStringWrite("Can't start yet:");
+        displayStringWrite("Select Mode and");
         displayCharPositionWrite(0, 1);
-        displayStringWrite("Select or close Door");
+        displayStringWrite("Close Door");
       }
-    } else {
-      if (!getWasherButtonState()) {
-        displayInit();
+    } else if (getWasherStart()) {
+      displayInit();
         displayCharPositionWrite(0, 0);
-        displayStringWrite("Can't start yet:");
+        displayStringWrite("Need Detergent");
         displayCharPositionWrite(0, 1);
-        displayStringWrite("Select or close Door");
-      }
+        displayStringWrite("or Overide");
     }
   } else {
     if (!soundAlarm) {
       if (!alarmSetup) {
-        servoUnlock();
         washerMotorWrite(STOPPED);
         timer = ALARMTIME;
         alarmSetup = true;
+        servoUnlock();
       }
       washerDicipline();
     } else {
@@ -147,28 +154,29 @@ void washerRunning() {
 void displayTime() {
   char buffer[20];
   int minutes = timer / 60000;
-  int seconds = timer / 1000 - minutes * 60;
+  int seconds = timer / ((1000 - minutes) * 60);
   displayCharPositionWrite(0, 0);
   displayStringWrite("Time Remaining: ");
   displayCharPositionWrite(0, 1);
   if (minutes < 10) {
     displayStringWrite("0");
     displayCharPositionWrite(1, 1);
-    sprintf(buffer, "%d", minutes);
+    sprintf(buffer, "%d           ", minutes);
     displayStringWrite(buffer);
   } else {
-    sprintf(buffer, "%d", minutes);
+    sprintf(buffer, "%d            ", minutes);
     displayStringWrite(buffer);
   }
   displayCharPositionWrite(2, 1);
   displayStringWrite(":");
+  displayCharPositionWrite(3, 1);
   if (seconds < 10) {
     displayStringWrite("0");
-    displayCharPositionWrite(3, 1);
-    sprintf(buffer, "%d", seconds);
+    displayCharPositionWrite(4, 1);
+    sprintf(buffer, "%d                 ", seconds);
     displayStringWrite(buffer);
   } else {
-    sprintf(buffer, "%d", minutes);
+    sprintf(buffer, "%d                 ", seconds);
     displayStringWrite(buffer);
   }
 }

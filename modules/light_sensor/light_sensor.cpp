@@ -12,7 +12,7 @@
 //=====[Declaration of private defines]========================================
 
 #define SAMPLESIZE 10
-#define DOORCLOSEDLEVEL 0.5
+#define DOORCLOSEDLEVEL 0.8
 
 //=====[Declaration of private data types]=====================================
 
@@ -39,6 +39,10 @@ float dryerLightValues[SAMPLESIZE];
 void sensorInit() {
     washerSensorState = false;
     dryerSensorState = false;
+    for (int i = 0; i < SAMPLESIZE; i++) {
+        washerLightValues[i] = 0.0;
+        dryerLightValues[i] = 0.0;
+  }
 }
 
 bool washerDoorClosed() {
@@ -49,39 +53,19 @@ bool dryerDoorClosed() {
     return dryerSensorState;
 }
 
-void sensorUpdate() {
-    float temp1 = washerLightSensor.read();
-    float temp2 = dryerLightSensor.read();
-    for (int i = SAMPLESIZE - 1; i >= 0; i--) {
-        if (i == 0) {
-            washerLightValues[i] = temp1;
-            dryerLightValues[i] = temp2;
-        } else {
-            washerLightValues[i] = washerLightValues[i-1];
-            dryerLightValues[i] = dryerLightValues[i-1];
-        }
-    }
+void WsensorUpdate() {
+    // Averages multiple readings to increase consistency
+  static int sensorReadingIndex = 0;
+  float readingSum = 0;
+  float readingAvg = 0;
+  washerLightValues[sensorReadingIndex] = washerLightSensor.read();
+  sensorReadingIndex = (sensorReadingIndex + 1) % SAMPLESIZE;
 
-    int total1 = 0;
-    int total2 = 0;
-    for (int i = 0; i < SAMPLESIZE; i++) {
-        total1 += washerLightValues[i];
-        total2 += dryerLightValues[i];
-    }
-
-    int average1 = total1/SAMPLESIZE;
-    if (average1 < DOORCLOSEDLEVEL) {
-        washerSensorState = true;
-    } else {
-        washerSensorState = false;
-    }
-
-    int average2 = total2/SAMPLESIZE;
-    if (average2 < DOORCLOSEDLEVEL) {
-        dryerSensorState = true;
-    } else {
-        dryerSensorState = false;
-    }
+  for (int i = 0; i < SAMPLESIZE; i++) {
+    readingSum += washerLightValues[i];
+  }
+  readingAvg = readingSum / float(SAMPLESIZE);
+  washerSensorState = readingAvg < DOORCLOSEDLEVEL;
 }
 
 
