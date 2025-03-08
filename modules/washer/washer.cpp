@@ -68,70 +68,68 @@ void washerInit() {
 
 void washerUpdate() {
   if (!callRunning) {
-  if (!testDicipline) {
-    gasUpdate();
-    if (gasStateRead()) {
-      if (!running) {
-        displayCharPositionWrite(0, 0);
-        displayStringWrite("Now Select Mode");
-        displayCharPositionWrite(0, 1);
-        displayStringWrite("and Close Door");
-        userInterfaceUpdate();
-        WsensorUpdate();
-      }
-      if (washerDoorClosed()) {
-          setWDoorClosedBool(true);
-      } else {
-          setWDoorClosedBool(false);
-      }
-      if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) { 
-        test = ON;
-        if (!setup) {
-          startOn();
-          washerMotorWrite(RUNNING);
-          timer = STARTTIME;
-          setup = true;
-          servoLock();
+    if (!testDicipline) {
+      gasUpdate();
+      if (gasStateRead()) {
+        if (!running) {
+          displayCharPositionWrite(0, 0);
+          displayStringWrite("Now Select Mode");
+          displayCharPositionWrite(0, 1);
+          displayStringWrite("and Close Door");
+          userInterfaceUpdate();
+          WsensorUpdate();
         }
-        callRunning = true;
+        if (washerDoorClosed()) {
+          setWDoorClosedBool(true);
+        } else {
+          setWDoorClosedBool(false);
+        }
+        if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
+          test = ON;
+          if (!setup) {
+            startOn();
+            washerMotorWrite(RUNNING);
+            timer = STARTTIME;
+            setup = true;
+            servoLock();
+          }
+          callRunning = true;
+        } else if (getWasherStart()) {
+          displayInit();
+          displayCharPositionWrite(0, 0);
+          displayStringWrite("Select Mode and");
+          displayCharPositionWrite(0, 1);
+          displayStringWrite("Close Door");
+        }
       } else if (getWasherStart()) {
         displayInit();
-        displayCharPositionWrite(0, 0);
-        displayStringWrite("Select Mode and");
-        displayCharPositionWrite(0, 1);
-        displayStringWrite("Close Door");
-      }
-    } else if (getWasherStart()) {
-      displayInit();
         displayCharPositionWrite(0, 0);
         displayStringWrite("Need Detergent");
         displayCharPositionWrite(0, 1);
         displayStringWrite("or Overide");
-    }
-  } else {
-    if (!soundAlarm) {
-      if (!alarmSetup) {
-        washerMotorWrite(STOPPED);
-        timer = ALARMTIME;
-        alarmSetup = true;
-        servoUnlock();
       }
-      callDicipline = true;;
     } else {
-      displayInit();
-      displayCharPositionWrite(0, 0);
-      displayStringWrite("You Failed!");
-      displayCharPositionWrite(0, 1);
-      displayStringWrite("Alarm On!");
-      alarmStateWrite(true);
-      alarmUpdate(1000);
+        if (!alarmSetup) {
+          washerMotorWrite(STOPPED);
+          timer = ALARMTIME;
+          alarmSetup = true;
+          servoUnlock();
+        }
+        callDicipline = true;
     }
-  }
   } else if (callDicipline) {
-      washerDicipline();
+    washerDicipline();
   } else if (callRunning) {
-      washerRunning();
-  }
+    washerRunning();
+  } else if (soundAlarm) {
+        displayInit();
+        displayCharPositionWrite(0, 0);
+        displayStringWrite("You Failed!");
+        displayCharPositionWrite(0, 1);
+        displayStringWrite("Alarm On!");
+        alarmStateWrite(true);
+        alarmUpdate(1000);
+      }
 }
 
 //=====[Implementations of private functions]==================================
@@ -143,7 +141,7 @@ void washerDicipline() {
     washerMotorWrite(STOPPED);
     callDicipline = false;
   } else {
-    timer -= SYSTEM_TIME_INCREMENT_MS;
+    timer -= SYSTEM_TIME_INCREMENT_MS + 90;
   }
   washerMotorUpdate();
 }
@@ -156,7 +154,7 @@ void washerRunning() {
     washerMotorWrite(STOPPED);
     callRunning = false;
   } else {
-    timer -= SYSTEM_TIME_INCREMENT_MS;
+    timer -= SYSTEM_TIME_INCREMENT_MS + 90;
   }
   washerMotorUpdate();
 }
@@ -171,10 +169,10 @@ void displayTime() {
   if (minutes < 10) {
     displayStringWrite("0");
     displayCharPositionWrite(1, 1);
-    sprintf(buffer, "%d           ", minutes);
+    sprintf(buffer, "%d", minutes);
     displayStringWrite(buffer);
   } else {
-    sprintf(buffer, "%d            ", minutes);
+    sprintf(buffer, "%d", minutes);
     displayStringWrite(buffer);
   }
   displayCharPositionWrite(2, 1);
@@ -183,10 +181,10 @@ void displayTime() {
   if (seconds < 10) {
     displayStringWrite("0");
     displayCharPositionWrite(4, 1);
-    sprintf(buffer, "%d                 ", seconds);
+    sprintf(buffer, "%d   Washing", seconds);
     displayStringWrite(buffer);
   } else {
-    sprintf(buffer, "%d                 ", seconds);
+    sprintf(buffer, "%d   Washing", seconds);
     displayStringWrite(buffer);
   }
 }
