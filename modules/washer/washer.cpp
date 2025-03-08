@@ -45,7 +45,7 @@ int timer = 0;
 
 void washerRunning();
 void washerDicipline();
-void displayTime();
+void displayTime(bool washing);
 
 //=====[Implementations of public functions]===================================
 
@@ -135,7 +135,7 @@ void washerUpdate() {
 //=====[Implementations of private functions]==================================
 
 void washerDicipline() {
-  displayTime();
+  displayTime(false);
   if (timer < 0) {
     soundAlarm = true;
     washerMotorWrite(STOPPED);
@@ -148,7 +148,7 @@ void washerDicipline() {
 
 void washerRunning() {
   running = true;
-  displayTime();
+  displayTime(true);
   if (timer < 0) {
     testDicipline = true;
     washerMotorWrite(STOPPED);
