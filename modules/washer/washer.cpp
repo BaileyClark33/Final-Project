@@ -159,7 +159,7 @@ void washerRunning() {
   washerMotorUpdate();
 }
 
-void displayTime() {
+void displayTime(bool washing) {
   char buffer[20];
   int minutes = timer / 60000;
   int seconds = (timer - (minutes * 60000)) / (1000);
@@ -181,10 +181,18 @@ void displayTime() {
   if (seconds < 10) {
     displayStringWrite("0");
     displayCharPositionWrite(4, 1);
-    sprintf(buffer, "%d   Washing", seconds);
+    sprintf(buffer, "%d", seconds);
     displayStringWrite(buffer);
   } else {
-    sprintf(buffer, "%d   Washing", seconds);
+    sprintf(buffer, "%d", seconds);
     displayStringWrite(buffer);
+  }
+
+  if (washing) {
+    displayCharPositionWrite(7, 1);
+    displayStringWrite("Washing");
+  } else {
+      displayCharPositionWrite(7, 1);
+    displayStringWrite("Discipline");
   }
 }
