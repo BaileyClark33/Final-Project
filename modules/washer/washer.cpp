@@ -189,10 +189,10 @@ void displayTime(bool washing) {
   }
 
   if (washing) {
-    displayCharPositionWrite(7, 1);
-    displayStringWrite("Washing");
+    displayCharPositionWrite(5, 1);
+    displayStringWrite("   Washing");
   } else {
-      displayCharPositionWrite(7, 1);
-    displayStringWrite("Discipline");
+      displayCharPositionWrite(5, 1);
+    displayStringWrite("   Testing");
   }
 }
