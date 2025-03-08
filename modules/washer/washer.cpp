@@ -37,6 +37,8 @@ static bool alarmSetup = false;
 static bool testDicipline = false;
 static bool soundAlarm = false;
 static bool running = false;
+bool callRunning = false;
+bool callDicipline = false;
 int timer = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
@@ -65,6 +67,7 @@ void washerInit() {
 }
 
 void washerUpdate() {
+  if (!callRunning) {
   if (!testDicipline) {
     gasUpdate();
     if (gasStateRead()) {
@@ -90,7 +93,7 @@ void washerUpdate() {
           setup = true;
           servoLock();
         }
-        washerRunning();
+        callRunning = true;
       } else if (getWasherStart()) {
         displayInit();
         displayCharPositionWrite(0, 0);
@@ -113,7 +116,7 @@ void washerUpdate() {
         alarmSetup = true;
         servoUnlock();
       }
-      washerDicipline();
+      callDicipline = true;;
     } else {
       displayInit();
       displayCharPositionWrite(0, 0);
@@ -124,6 +127,11 @@ void washerUpdate() {
       alarmUpdate(1000);
     }
   }
+  } else if (callDicipline) {
+      washerDicipline();
+  } else if (callRunning) {
+      washerRunning();
+  }
 }
 
 //=====[Implementations of private functions]==================================
@@ -133,6 +141,7 @@ void washerDicipline() {
   if (timer < 0) {
     soundAlarm = true;
     washerMotorWrite(STOPPED);
+    callDicipline = false;
   } else {
     timer -= SYSTEM_TIME_INCREMENT_MS;
   }
@@ -145,6 +154,7 @@ void washerRunning() {
   if (timer < 0) {
     testDicipline = true;
     washerMotorWrite(STOPPED);
+    callRunning = false;
   } else {
     timer -= SYSTEM_TIME_INCREMENT_MS;
   }
@@ -154,7 +164,7 @@ void washerRunning() {
 void displayTime() {
   char buffer[20];
   int minutes = timer / 60000;
-  int seconds = timer / ((1000 - minutes) * 60);
+  int seconds = (timer - (minutes * 60000)) / (1000);
   displayCharPositionWrite(0, 0);
   displayStringWrite("Time Remaining: ");
   displayCharPositionWrite(0, 1);
