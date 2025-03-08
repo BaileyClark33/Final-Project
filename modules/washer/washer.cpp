@@ -15,7 +15,7 @@
 //=====[Declaration of private defines]========================================
 
 #define STARTTIME 3000
-#define ALARMTIME 10000
+#define ALARMTIME 5000
 
 //=====[Declaration of private data types]=====================================
 
@@ -39,6 +39,7 @@ static bool soundAlarm = false;
 static bool running = false;
 bool callRunning = false;
 bool callDicipline = false;
+bool settingUp = true;
 int timer = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
@@ -67,60 +68,49 @@ void washerInit() {
 }
 
 void washerUpdate() {
-  if (!callRunning) {
-    if (!testDicipline) {
+  if (settingUp) {
       gasUpdate();
       if (gasStateRead()) {
-        if (!running) {
           displayCharPositionWrite(0, 0);
           displayStringWrite("Now Select Mode");
           displayCharPositionWrite(0, 1);
           displayStringWrite("and Close Door");
-          userInterfaceUpdate();
-          WsensorUpdate();
-        }
         if (washerDoorClosed()) {
           setWDoorClosedBool(true);
         } else {
           setWDoorClosedBool(false);
         }
-        if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
-          test = ON;
-          if (!setup) {
-            startOn();
-            washerMotorWrite(RUNNING);
-            timer = STARTTIME;
-            setup = true;
-            servoLock();
-          }
+        userInterfaceUpdate();         
+        WsensorUpdate();
+          if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
+            test = ON;
+            if (!setup) {
+              startOn();
+              washerMotorWrite(RUNNING);
+              servoLock();
+              timer = STARTTIME;
+              setup = true;
+            }
           callRunning = true;
+          settingUp = false;
+          } 
         } else if (getWasherStart()) {
           displayInit();
           displayCharPositionWrite(0, 0);
-          displayStringWrite("Select Mode and");
+          displayStringWrite("Need Detergent");
           displayCharPositionWrite(0, 1);
-          displayStringWrite("Close Door");
+          displayStringWrite("or Overide");
         }
-      } else if (getWasherStart()) {
-        displayInit();
-        displayCharPositionWrite(0, 0);
-        displayStringWrite("Need Detergent");
-        displayCharPositionWrite(0, 1);
-        displayStringWrite("or Overide");
-      }
-    } else {
-        if (!alarmSetup) {
-          washerMotorWrite(STOPPED);
-          timer = ALARMTIME;
-          alarmSetup = true;
-          servoUnlock();
-        }
-        callDicipline = true;
-    }
-  } else if (callDicipline) {
-    washerDicipline();
   } else if (callRunning) {
     washerRunning();
+  } else if (callDicipline) {
+      if (!alarmSetup) {
+          washerMotorWrite(STOPPED);
+          servoUnlock();
+          timer = ALARMTIME;
+          alarmSetup = true;
+        }
+    washerDicipline();
   } else if (soundAlarm) {
         displayInit();
         displayCharPositionWrite(0, 0);
@@ -138,19 +128,17 @@ void washerDicipline() {
   displayTime(false);
   if (timer < 0) {
     soundAlarm = true;
-    washerMotorWrite(STOPPED);
     callDicipline = false;
   } else {
     timer -= SYSTEM_TIME_INCREMENT_MS + 90;
   }
-  washerMotorUpdate();
 }
 
 void washerRunning() {
   running = true;
   displayTime(true);
   if (timer < 0) {
-    testDicipline = true;
+    callDicipline = true;
     washerMotorWrite(STOPPED);
     callRunning = false;
   } else {
