@@ -19,6 +19,7 @@ void setWDoorClosedBool(bool state);
 void setDDoorClosedBool(bool state);
 bool getWasherStart();
 bool getDryerStart();
+void gasButtonUpdate();
 
 //=====[#include guards - end]=================================================
 
