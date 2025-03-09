@@ -14,8 +14,8 @@
 
 //=====[Declaration of private defines]========================================
 
-#define STARTTIME 3000
-#define ALARMTIME 5000
+#define STARTTIME 60000
+#define ALARMTIME 30000
 
 //=====[Declaration of private data types]=====================================
 
@@ -61,65 +61,69 @@ void washerInit() {
   userInterfaceInit();
   motorControlInit();
   displayInit();
-  displayCharPositionWrite(0, 0);
-  displayStringWrite("Hello: Put in");
-  displayCharPositionWrite(0, 1);
-  displayStringWrite("Detergent");
+  
 }
 
 void washerUpdate() {
   if (settingUp) {
-      gasUpdate();
-      if (gasStateRead()) {
-          displayCharPositionWrite(0, 0);
-          displayStringWrite("Now Select Mode");
-          displayCharPositionWrite(0, 1);
-          displayStringWrite("and Close Door");
-        if (washerDoorClosed()) {
-          setWDoorClosedBool(true);
-        } else {
-          setWDoorClosedBool(false);
-        }
-        userInterfaceUpdate();         
-        WsensorUpdate();
-          if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
-            test = ON;
-            if (!setup) {
-              startOn();
-              washerMotorWrite(RUNNING);
-              servoLock();
-              timer = STARTTIME;
-              setup = true;
-            }
-          callRunning = true;
-          settingUp = false;
-          } 
-        } else if (getWasherStart()) {
-          displayInit();
-          displayCharPositionWrite(0, 0);
-          displayStringWrite("Need Detergent");
-          displayCharPositionWrite(0, 1);
-          displayStringWrite("or Overide");
-        }
+      static bool hello = false;
+      if (!hello) {
+      displayCharPositionWrite(0, 0);
+  displayStringWrite("Hello: Put in");
+  displayCharPositionWrite(0, 1);
+  displayStringWrite("Detergent");
+  hello = true;
+      }
+    gasUpdate();
+    if (gasStateRead()) {
+      displayCharPositionWrite(0, 0);
+      displayStringWrite("Now Select Mode");
+      displayCharPositionWrite(0, 1);
+      displayStringWrite("and Close Door");
+      if (washerDoorClosed()) {
+        setWDoorClosedBool(true);
+      } else {
+        setWDoorClosedBool(false);
+      }
+      userInterfaceUpdate();
+      WsensorUpdate();
+      if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
+        test = ON;
+        callRunning = true;
+        settingUp = false;
+      }
+    } else if (getWasherStart()) {
+      displayInit();
+      displayCharPositionWrite(0, 0);
+      displayStringWrite("Need Detergent");
+      displayCharPositionWrite(0, 1);
+      displayStringWrite("or Overide");
+    }
   } else if (callRunning) {
+    if (!setup) {
+      startOn();
+      washerMotorWrite(RUNNING);
+      servoLock();
+      timer = STARTTIME;
+      setup = true;
+    }
     washerRunning();
   } else if (callDicipline) {
-      if (!alarmSetup) {
-          washerMotorWrite(STOPPED);
-          servoUnlock();
-          timer = ALARMTIME;
-          alarmSetup = true;
-        }
+    if (!alarmSetup) {
+      washerMotorWrite(STOPPED);
+      servoUnlock();
+      timer = ALARMTIME;
+      alarmSetup = true;
+    }
     washerDicipline();
   } else if (soundAlarm) {
-        displayInit();
-        displayCharPositionWrite(0, 0);
-        displayStringWrite("You Failed!");
-        displayCharPositionWrite(0, 1);
-        displayStringWrite("Alarm On!");
-        alarmStateWrite(true);
-        alarmUpdate(1000);
-      }
+    displayCharPositionWrite(0, 0);
+    displayStringWrite("You Failed!");
+    displayCharPositionWrite(0, 1);
+    displayStringWrite("Alarm On!             ");
+    alarmStateWrite(true);
+    alarmUpdate(100);
+  }
 }
 
 //=====[Implementations of private functions]==================================
@@ -180,7 +184,7 @@ void displayTime(bool washing) {
     displayCharPositionWrite(5, 1);
     displayStringWrite("   Washing");
   } else {
-      displayCharPositionWrite(5, 1);
+    displayCharPositionWrite(5, 1);
     displayStringWrite("   Testing");
   }
 }

@@ -23,7 +23,7 @@ DigitalIn dryerLow(PC_2);
 DigitalIn dryerOff(PF_4);
 DigitalIn dryerStart(PB_6);
 
-DigitalIn gasOver(PB_2);
+DigitalIn gasOver(D15);
 
 
 //=====[Declaration of external public global variables]=======================
