@@ -61,19 +61,18 @@ void washerInit() {
   userInterfaceInit();
   motorControlInit();
   displayInit();
-  
 }
 
 void washerUpdate() {
   if (settingUp) {
-      static bool hello = false;
-      if (!hello) {
+    static bool hello = false;
+    if (!hello) {
       displayCharPositionWrite(0, 0);
-  displayStringWrite("Hello: Put in");
-  displayCharPositionWrite(0, 1);
-  displayStringWrite("Detergent");
-  hello = true;
-      }
+      displayStringWrite("Hello: Put in");
+      displayCharPositionWrite(0, 1);
+      displayStringWrite("Detergent");
+      hello = true;
+    }
     gasUpdate();
     if (gasStateRead()) {
       displayCharPositionWrite(0, 0);
