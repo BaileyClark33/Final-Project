@@ -62,7 +62,7 @@ void gasUpdate() {
     }
 
     int average = total / SAMPLESIZE;
-    if (average > DETERGENTINLEVEL) {
+    if (average < DETERGENTINLEVEL) {
       gasState = true;
       gasOveride = true;
     } else {

@@ -74,6 +74,7 @@ void washerUpdate() {
       hello = true;
     }
     gasUpdate();
+    gasButtonUpdate();
     if (gasStateRead()) {
       displayCharPositionWrite(0, 0);
       displayStringWrite("Now Select Mode");

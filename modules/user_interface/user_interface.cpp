@@ -118,10 +118,6 @@ void washerSelect() {
     setWasherColdOn();
     hasSelected = true;
   }
-
-  if (gasOver == ON) {
-    gasStateOveride(true);
-  }
 }
 
 void startOn() {
@@ -140,5 +136,11 @@ void dryerSelect() {
   if (dryerOff == ON) {
     setDryerOffOn();
     hasSelected = true;
+  }
+}
+
+void gasButtonUpdate() {
+  if (gasOver == ON) {
+    gasStateOveride(true);
   }
 }
