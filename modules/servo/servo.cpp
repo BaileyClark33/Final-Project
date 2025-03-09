@@ -15,16 +15,14 @@
 #define STOP_PERIOD 1.5
 #define DUTY_STOP 0.075
 
-#define DUTY_ZERO 0.025//25
-#define DUTY_90 0.0625//68
-
-#define SERVO_INCREMENT 1
+#define DUTY_ZERO 0.025//0
+#define DUTY_90 0.0625//90
 
 //=====[Declaration of private data types]=====================================
 
 //=====[Declaration and initialization of public global objects]===============
 
-PwmOut servo( PE_14 );
+PwmOut servo(PF_9);
 
 //=====[Declaration of external public global variables]=======================
 
@@ -50,6 +48,7 @@ void servoUnlock();
 void servoInit() {
    servo.period(PERIOD);
    servo.write(DUTY_ZERO);
+   delay(1000);
    servo_update_time = 0;
    angle = DUTY_ZERO;
 }
@@ -64,8 +63,8 @@ void servoLock() {
 }
 
 void servoUnlock() {
-    servo.write(DUTY_ZERO);
-    delay(1000);
+  servo.write(DUTY_ZERO);
+  delay(1000);
 }
 //=====[Implementations of private functions]==================================
 

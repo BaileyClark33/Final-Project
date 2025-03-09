@@ -14,8 +14,8 @@
 
 //=====[Declaration of private defines]========================================
 
-#define STARTTIME 60000
-#define ALARMTIME 30000
+#define STARTTIME 10000
+#define ALARMTIME 3000
 
 //=====[Declaration of private data types]=====================================
 
@@ -32,14 +32,15 @@ DigitalOut blue(LED2);
 
 //=====[Declaration and initialization of private global variables]============
 
-static bool setup = false;
-static bool alarmSetup = false;
-static bool testDicipline = false;
-static bool soundAlarm = false;
-static bool running = false;
+bool setup = false;
+bool alarmSetup = false;
+bool testDicipline = false;
+bool soundAlarm = false;
+bool running = false;
 bool callRunning = false;
 bool callDicipline = false;
 bool settingUp = true;
+bool successMode = false;
 int timer = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
@@ -88,7 +89,6 @@ void washerUpdate() {
       userInterfaceUpdate();
       WsensorUpdate();
       if (getHasSelected() && washerDoorClosed() && getWasherButtonState()) {
-        test = ON;
         callRunning = true;
         settingUp = false;
       }
@@ -111,18 +111,22 @@ void washerUpdate() {
   } else if (callDicipline) {
     if (!alarmSetup) {
       washerMotorWrite(STOPPED);
-      servoUnlock();
       timer = ALARMTIME;
       alarmSetup = true;
     }
     washerDicipline();
   } else if (soundAlarm) {
     displayCharPositionWrite(0, 0);
-    displayStringWrite("You Failed!");
+    displayStringWrite("You Failed!       ");
     displayCharPositionWrite(0, 1);
     displayStringWrite("Alarm On!             ");
     alarmStateWrite(true);
     alarmUpdate(100);
+  } else if (successMode) {
+    displayCharPositionWrite(0, 0);
+    displayStringWrite("You Did It!            ");
+    displayCharPositionWrite(0, 1);
+    displayStringWrite("Success!              ");
   }
 }
 
@@ -130,7 +134,11 @@ void washerUpdate() {
 
 void washerDicipline() {
   displayTime(false);
-  if (timer < 0) {
+  WsensorUpdate();
+  if (!washerDoorClosed()) {
+    successMode = true;
+    callDicipline = false;
+  } else if (timer < 0) {
     soundAlarm = true;
     callDicipline = false;
   } else {
@@ -145,6 +153,7 @@ void washerRunning() {
     callDicipline = true;
     washerMotorWrite(STOPPED);
     callRunning = false;
+    servoUnlock();
   } else {
     timer -= SYSTEM_TIME_INCREMENT_MS + 90;
   }
