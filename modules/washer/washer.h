@@ -13,6 +13,7 @@
 
 void washerInit();
 void washerUpdate();
+bool getWasherSuccess();
 
 //=====[#include guards - end]=================================================
 

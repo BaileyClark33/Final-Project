@@ -25,9 +25,6 @@ UnbufferedSerial uart(USBTX, USBRX, 115200);
 
 //=====[Declaration of external public global variables]=======================
 
-DigitalOut test(LED1);
-DigitalOut blue(LED2);
-
 //=====[Declaration and initialization of public global variables]=============
 
 //=====[Declaration and initialization of private global variables]============
@@ -41,6 +38,7 @@ bool callRunning = false;
 bool callDicipline = false;
 bool settingUp = true;
 bool successMode = false;
+bool washerTestSuccess = false;
 int timer = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
@@ -52,8 +50,6 @@ void displayTime(bool washing);
 //=====[Implementations of public functions]===================================
 
 void washerInit() {
-  test = OFF;
-  blue = OFF;
   gasInit();
   alarmInit();
   servoInit();
@@ -61,8 +57,9 @@ void washerInit() {
   displayInit();
   userInterfaceInit();
   motorControlInit();
-  displayInit();
 }
+
+bool getWasherSuccess() { return washerTestSuccess; }
 
 void washerUpdate() {
   if (settingUp) {
@@ -124,9 +121,10 @@ void washerUpdate() {
     alarmUpdate(100);
   } else if (successMode) {
     displayCharPositionWrite(0, 0);
-    displayStringWrite("You Did It!            ");
+    displayStringWrite("You Got Back!         ");
     displayCharPositionWrite(0, 1);
     displayStringWrite("Success!              ");
+    washerTestSuccess = true;
   }
 }
 
@@ -144,6 +142,7 @@ void washerDicipline() {
   } else {
     timer -= SYSTEM_TIME_INCREMENT_MS + 90;
   }
+  washerMotorUpdate();
 }
 
 void washerRunning() {

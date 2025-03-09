@@ -37,6 +37,7 @@ void motorControlInit() {
   dryerMotorM1Pin.mode(OpenDrain);
   dryerMotorM2Pin.mode(OpenDrain);
 
+
   washerMotorM1Pin.input();
   washerMotorM2Pin.input();
   dryerMotorM1Pin.input();

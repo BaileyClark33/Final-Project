@@ -18,6 +18,8 @@
 
 //=====[Declaration and initialization of private global variables]============
 
+bool washerMode = true;
+
 //=====[Declarations (prototypes) of private functions]========================
 
 //=====[Implementations of public functions]===================================
@@ -28,8 +30,12 @@ void laundryInit() {
 }
 
 void laundryUpdate() {
+    if (washerMode) {
     washerUpdate();
+    } else {
     //dryerUpdate();
+    }
+    washerMode = !getWasherSuccess();
 }
 
 //=====[Implementations of private functions]==================================

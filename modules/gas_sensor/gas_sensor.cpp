@@ -11,7 +11,7 @@
 //=====[Declaration of private defines]========================================
 
 #define SAMPLESIZE 10
-#define DETERGENTINLEVEL 0.5
+#define DETERGENTINLEVEL 0.8
 
 //=====[Declaration of private data types]=====================================
 
@@ -47,27 +47,17 @@ void gasStateOveride(bool state) {
 
 void gasUpdate() {
   if (!gasOveride) {
-    float temp = gasSensor.read();
-    for (int i = SAMPLESIZE - 1; i >= 0; i--) {
-      if (i == 0) {
-        gasValues[i] = temp;
-      } else {
-        gasValues[i] = gasValues[i - 1];
-      }
-    }
+    static int sensorReadingIndex = 0;
+    float readingSum = 0;
+    float readingAvg = 0;
+    gasValues[sensorReadingIndex] = gasSensor.read();
+    sensorReadingIndex = (sensorReadingIndex + 1) % SAMPLESIZE;
 
-    int total;
     for (int i = 0; i < SAMPLESIZE; i++) {
-      total += gasValues[i];
+      readingSum += gasValues[i];
     }
-
-    int average = total / SAMPLESIZE;
-    if (average < DETERGENTINLEVEL) {
-      gasState = true;
-      gasOveride = true;
-    } else {
-      gasState = false;
-    }
+    readingAvg = readingSum / float(SAMPLESIZE);
+    gasState = readingAvg > DETERGENTINLEVEL;
   }
 }
 
