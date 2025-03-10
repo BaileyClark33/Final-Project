@@ -98,9 +98,9 @@ void washerUpdate() {
     }
   } else if (callRunning) {
     if (!setup) {
+      servoLock();  
       startOn();
       washerMotorWrite(RUNNING);
-      servoLock();
       timer = STARTTIME;
       setup = true;
     }
