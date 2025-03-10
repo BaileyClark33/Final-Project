@@ -152,6 +152,7 @@ void washerRunning() {
     callDicipline = true;
     washerMotorWrite(STOPPED);
     washerMotorUpdate();
+    delay(1000);
     callRunning = false;
     servoUnlock();
   } else {
