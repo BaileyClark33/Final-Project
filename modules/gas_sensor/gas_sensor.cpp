@@ -11,7 +11,7 @@
 //=====[Declaration of private defines]========================================
 
 #define SAMPLESIZE 10
-#define DETERGENTINLEVEL 0.8
+#define DETERGENTINLEVEL 7
 
 //=====[Declaration of private data types]=====================================
 
@@ -50,14 +50,17 @@ void gasUpdate() {
     static int sensorReadingIndex = 0;
     float readingSum = 0;
     float readingAvg = 0;
-    gasValues[sensorReadingIndex] = gasSensor.read();
+    gasValues[sensorReadingIndex] = gasSensor;
     sensorReadingIndex = (sensorReadingIndex + 1) % SAMPLESIZE;
 
+    int sampleCount = 0;
+
     for (int i = 0; i < SAMPLESIZE; i++) {
-      readingSum += gasValues[i];
+      if (gasValues[i]) {
+          sampleCount++;
+      }
     }
-    readingAvg = readingSum / float(SAMPLESIZE);
-    gasState = readingAvg > DETERGENTINLEVEL;
+    gasState = (sampleCount >= DETERGENTINLEVEL);
   }
 }
 
