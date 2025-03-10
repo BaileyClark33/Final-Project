@@ -36,6 +36,9 @@ float gasValues[SAMPLESIZE];
 void gasInit() {
   gasState = false;
   gasOveride = false;
+  for (int i = 0; i < SAMPLESIZE; i++) {
+      gasValues[i] = false;
+  }
 }
 
 bool gasStateRead() { return gasState; }
