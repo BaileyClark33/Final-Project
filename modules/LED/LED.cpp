@@ -9,7 +9,7 @@
 //=====[Declaration of private data types]=====================================
 
 DigitalOut washerHotLight(PE_15);
-DigitalOut washerWarmLight(PB_10);
+DigitalOut washerWarmLight(PE_14);
 DigitalOut washerColdLight(PB_11);
 DigitalOut washerStartLight(PC_6);
 DigitalOut dryerHighLight(PA_0);
