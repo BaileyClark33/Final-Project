@@ -131,6 +131,7 @@ void washerUpdate() {
 //=====[Implementations of private functions]==================================
 
 void washerDicipline() {
+  washerMotorUpdate();
   displayTime(false);
   WsensorUpdate();
   if (!washerDoorClosed()) {
@@ -142,7 +143,6 @@ void washerDicipline() {
   } else {
     timer -= SYSTEM_TIME_INCREMENT_MS + 90;
   }
-  washerMotorUpdate();
 }
 
 void washerRunning() {
@@ -151,6 +151,7 @@ void washerRunning() {
   if (timer < 0) {
     callDicipline = true;
     washerMotorWrite(STOPPED);
+    washerMotorUpdate();
     callRunning = false;
     servoUnlock();
   } else {
