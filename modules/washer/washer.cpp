@@ -14,8 +14,8 @@
 
 //=====[Declaration of private defines]========================================
 
-#define STARTTIME 10000
-#define ALARMTIME 3000
+#define STARTTIME 8000
+#define ALARMTIME 10000
 
 //=====[Declaration of private data types]=====================================
 
