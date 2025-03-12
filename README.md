@@ -15,14 +15,14 @@ promptly
 Code was created for a dryer system in this repository however was never tested. All Dryer code is commented out.  
 ## Project Behavior Table
 
-| Specification                                                                            |        Test Result     
+|Specification                                                                            |        Test Result          |         Comment
 |------------------|-----------------------------|----------------------
-| Welcome message is displeyed when the driver sits down|         pass    |        
-| Green LED turns on when all saftey measures are met                    |         pass  |      
-| Engine Starts message and blue LED turns on when saftey measures are met and ignition button is pressed      | pass|                                                                      
-| If the green LED is off and ignition button is pressed ignition is inhibited. Sound the alarm buzzer and display the message, “Ignition inhibited” and why the ignition was inhibited | pass |
-| Stop the engine when the ignition button is pushed and released when running                 | pass |
-| The speed of the wipers are correct based on the user select | pass |
-| In intermittent mode, the delay selected is correctly implemented | pass |
-| LCD display shows the Wipers mode, and the delay if it is in intermittent mode| pass|
-| When the wipers are turned off, the wipers complete the cycle before stopping | pass |
+| Gas Sensor sensing hand sanitizer|         fail    |        
+| LCD displays welcome message                    |         pass  |      
+| Selection buttons and corrosponding LEDs turn on and turn the others off      | pass|                                                                      
+| Start button does not turn on the motor when the door is open or is a selection has not been clicked | pass |
+| Motor runs, LCD displays time, Servo Locks when the start button is pressed when the door is closed and a selection has been made                 | pass |
+| Motor stops and servo unlocks when the timer runs out | pass |
+| LCD displays a new timer for the testing portion of the education washer and keeps counting down | pass |
+| Alarm sounds if this new timer runs out| pass|
+| LCD displays success message if the door is open when the dicipline time is running | pass |
