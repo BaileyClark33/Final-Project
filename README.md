@@ -17,8 +17,9 @@ Code was created for a dryer system in this repository however was never tested.
 
 |Specification                                                                            |        Test Result          |         Comment
 |------------------|-----------------------------|----------------------
+| LCD displays welcome message                    |         pass  |
 | Gas Sensor sensing hand sanitizer|         fail    |        
-| LCD displays welcome message                    |         pass  |      
+| Gas overide button chenges LCD display to ask for a selection and the door to be closed                    |         pass  |            
 | Selection buttons and corrosponding LEDs turn on and turn the others off      | pass|                                                                      
 | Start button does not turn on the motor when the door is open or is a selection has not been clicked | pass |
 | Motor runs, LCD displays time, Servo Locks when the start button is pressed when the door is closed and a selection has been made                 | pass |
