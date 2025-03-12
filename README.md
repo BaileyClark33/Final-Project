@@ -15,7 +15,7 @@ promptly
 Code was created for a dryer system in this repository however was never tested. All Dryer code is commented out.  
 ## Project Behavior Table
 
-|Specification                                                                            |        Test Result     
+| Specification                                                                            |        Test Result     
 |------------------|-----------------------------|----------------------
 | Welcome message is displeyed when the driver sits down|         pass    |        
 | Green LED turns on when all saftey measures are met                    |         pass  |      
