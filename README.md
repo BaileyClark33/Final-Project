@@ -27,3 +27,7 @@ Code was created for a dryer system in this repository however was never tested.
 | LCD displays a new timer for the testing portion of the education washer and keeps counting down | pass |
 | Alarm sounds if this new timer runs out| pass|
 | LCD displays success message if the door is open when the dicipline time is running | pass |
+
+
+##Modular Diagram of the Code
+<img width="513" alt="Screenshot 2025-03-13 at 7 15 36 AM" src="https://github.com/user-attachments/assets/6714e988-672a-466e-a9fa-495972ea29f9" />
