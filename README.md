@@ -11,8 +11,18 @@ laundry before an alarm sounds, reinforcing the importance of promptness. Additi
 cycle and the status of the cycle. This system will ensure young adults not only do their laundy in the correct order, but also get their laundry 
 promptly 
 
+The hardware used in this project included a gas sensor designed to detect whether "detergent" had been placed in the machine. Five push buttons were incorporated into the system, each 
+serving a specific function. One button acted as the gas override, allowing users to bypass the detergent detection. Three buttons were used for selecting the wash cycle temperature, 
+offering options for hot, warm, or cold settings. The final push button served as the "Go" button, initiating the washing machine cycle. An LCD display was included to provide 
+real-time feedback to the user, such as the remaining time on the cycle. A light sensor was implemented to detect the status of the door, determining whether it was open or closed. 
+Since precise positioning was crucial, a positional servo was used to lock the door securely before the wash cycle began. A DC motor was installed to spin the drum once the cycle 
+was in progress, simulating the functionality of a real washing machine. Additionally, a buzzer was programmed to sound an alert if the user failed to retrieve their 
+laundry within two minutes of the cycle’s completion.
 
-Code was created for a dryer system in this repository however was never tested. All Dryer code is commented out.  
+Although code was written for a dryer system as part of this repository, it was never tested. The dryer-related code remains commented out but is included in the Modular Diagram for 
+anyone interested in implementing both washing and drying functions in the future.
+
+
 ## Project Behavior Table
 
 |Specification                                                                            |        Test Result          |         Comment
@@ -32,3 +42,8 @@ Code was created for a dryer system in this repository however was never tested.
 ## Modular Diagram of the Code
 
 <img width="513" alt="Screenshot 2025-03-13 at 7 15 36 AM" src="https://github.com/user-attachments/assets/6714e988-672a-466e-a9fa-495972ea29f9" />
+
+
+## Price for Washing Machine Hardware
+<img width="1216" alt="Screenshot 2025-03-13 at 8 04 34 AM" src="https://github.com/user-attachments/assets/8c22a814-ca6e-43da-8fc4-7817748155ca" />
+
