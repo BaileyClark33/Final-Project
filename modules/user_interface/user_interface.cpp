@@ -18,10 +18,10 @@ DigitalIn washerWarm(D11);
 DigitalIn washerCold(D10);
 DigitalIn washerStart(D13);
 
-DigitalIn dryerHigh(PB_1);
-DigitalIn dryerLow(PC_2);
-DigitalIn dryerOff(PF_4);
-DigitalIn dryerStart(PB_6);
+DigitalIn dryerHigh();
+DigitalIn dryerLow();
+DigitalIn dryerOff();
+DigitalIn dryerStart();
 
 DigitalIn gasOver(D15);
 
