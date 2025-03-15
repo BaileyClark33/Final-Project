@@ -8,13 +8,13 @@
 
 //=====[Declaration of private data types]=====================================
 
-DigitalOut washerHotLight(PE_15);
-DigitalOut washerWarmLight(PE_14);
-DigitalOut washerColdLight(PB_11);
-DigitalOut washerStartLight(PC_6);
-DigitalOut dryerHighLight(PA_0);
-DigitalOut dryerLowLight(PB_0);
-DigitalOut dryerOffLight(PE_0);
+DigitalOut washerHotLight(PF_4);
+DigitalOut washerWarmLight(PB_6);
+DigitalOut washerColdLight(PB_2);
+DigitalOut washerStartLight(PD_13);
+DigitalOut dryerHighLight();
+DigitalOut dryerLowLight();
+DigitalOut dryerOffLight();
 
 //=====[Declaration and initialization of public global objects]===============
 
