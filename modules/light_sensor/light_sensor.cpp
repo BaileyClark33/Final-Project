@@ -19,7 +19,7 @@
 //=====[Declaration and initialization of public global objects]===============
 
 AnalogIn washerLightSensor( A0 );
-AnalogIn dryerLightSensor( A2 );
+AnalogIn dryerLightSensor( );
 
 //=====[Declaration of external public global variables]=======================
 
