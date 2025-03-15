@@ -15,7 +15,7 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalInOut alarm(PE_10);
+DigitalInOut alarm(PD_7);
 
 //=====[Declaration of external public global variables]=======================
 
