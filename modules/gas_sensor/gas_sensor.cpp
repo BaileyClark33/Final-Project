@@ -17,7 +17,7 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalIn gasSensor(D14);
+DigitalIn gasSensor(PB_11);
 
 //=====[Declaration of external public global variables]=======================
 
