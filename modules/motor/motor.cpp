@@ -14,9 +14,9 @@
 //=====[Declaration and initialization of public global objects]===============
 
 DigitalInOut washerMotorM1Pin(PF_2);
-DigitalInOut washerMotorM2Pin(PE_3);   
-DigitalInOut dryerMotorM1Pin(PH_1);
-DigitalInOut dryerMotorM2Pin(PH_0);
+DigitalInOut washerMotorM2Pin(PH_1);   
+DigitalInOut dryerMotorM1Pin( );
+DigitalInOut dryerMotorM2Pin( );
 
 //=====[Declaration of external public global variables]=======================
 
