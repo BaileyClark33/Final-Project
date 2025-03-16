@@ -15,6 +15,7 @@ bool getWasherButtonState();
 bool getDryerButtonState();
 bool getHasSelected(); 
 void startOn();
+void startOff();
 void setWDoorClosedBool(bool state);
 void setDDoorClosedBool(bool state);
 bool getWasherStart();
