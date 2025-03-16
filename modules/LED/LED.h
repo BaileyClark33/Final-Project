@@ -15,6 +15,7 @@ void setWasherHotOn();
 void setWasherWarmOn();
 void setWasherColdOn();
 void WstartLEDon();
+void WstartLEDoff();
 void setDryerHighOn();
 void setDryerLowOn();
 void setDryerOffOn();
