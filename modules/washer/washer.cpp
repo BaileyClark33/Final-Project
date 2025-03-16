@@ -108,7 +108,6 @@ void washerUpdate() {
   } else if (callDicipline) {
     if (!alarmSetup) {
       servoUnlock();
-      startOff();
       washerMotorWrite(STOPPED);
       timer = ALARMTIME;
       alarmSetup = true;
