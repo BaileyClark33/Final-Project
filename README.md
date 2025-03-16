@@ -29,7 +29,7 @@ anyone interested in implementing both washing and drying functions in the futur
 |------------------|-----------------------------|----------------------
 | LCD displays welcome message                    |         pass  |
 | Gas Sensor sensing hand sanitizer|         fail    | Gas sensor sensitivity was changed and gas was only detected when this sensitivity was being changed and not during testing
-| Gas overide button chenges LCD display to ask for a selection and the door to be closed                    |         pass  |            
+| Gas overide button changes LCD display to ask for a selection and the door to be closed                    |         pass  |            
 | Selection buttons and corrosponding LEDs turn on and turn the others off      | pass|                                                                      
 | Start button does not turn on the motor when the door is open or is a selection has not been clicked | pass | The top of the machine should stay on so that the light sensor detects a closed door when the door is closed and not the light coming from the top
 | Motor runs, LCD displays time, Servo Locks when the start button is pressed when the door is closed and a selection has been made                 | pass | Door must be closed all the say for the servo to lock the outside of the door
