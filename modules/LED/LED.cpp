@@ -60,6 +60,10 @@ void WstartLEDon() {
     washerStartLight = ON;
 }
 
+void WstartLEDoff() {
+    washerStartLight = OFF;
+}
+
 void setDryerHighOn() {
     dryerLedInit();
     dryerHighLight = ON;
