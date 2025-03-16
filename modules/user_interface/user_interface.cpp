@@ -124,6 +124,10 @@ void startOn() {
     WstartLEDon();
 }
 
+void startOff() {
+  WstartLEDoff();
+}
+
 void dryerSelect() {
   if (dryerHigh == ON) {
     setDryerHighOn();
